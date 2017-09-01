@@ -18,6 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- 单一布局模板Demo活动 -->
+        <activity android:name=".SingleTextActivity" />
     </application>
 
 </manifest>
