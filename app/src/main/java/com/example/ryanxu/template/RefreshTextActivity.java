@@ -3,22 +3,20 @@ package com.example.ryanxu.template;
 import android.view.View;
 import android.widget.TextView;
 
-import com.ryanx.onenine.template.refresh.RefreshTemplateActivity;
+import com.onenine.template.annotations.InflateLayouts;
+import com.onenine.template.annotations.TemplateLayout;
 
 /**
  * Created by xuchunlei on 2017/9/2.
  */
 
-public class RefreshTextActivity extends RefreshTemplateActivity {
+@TemplateLayout(R.layout.template_refresh)
+@InflateLayouts(R.layout.activity_text)
+public class RefreshTextActivity extends BaseActivity {
 
     @Override
-    protected int getContentResource() {
-        return R.layout.activity_text;
-    }
-
-    @Override
-    protected void initContent(View content) {
+    public void onInflateView(int type, View view) {
         setTitle(SingleTextActivity.class.getSimpleName());
-        ((TextView)content).setText(SingleTextActivity.class.getSimpleName());
+        ((TextView)view).setText(SingleTextActivity.class.getSimpleName());
     }
 }

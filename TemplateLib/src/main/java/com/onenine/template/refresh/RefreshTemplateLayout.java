@@ -1,4 +1,4 @@
-package com.ryanx.onenine.template.refresh;
+package com.onenine.template.refresh;
 
 import android.content.Context;
 import android.util.AttributeSet;

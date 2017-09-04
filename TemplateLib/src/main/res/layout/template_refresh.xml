@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.ryanx.onenine.template.refresh.RefreshTemplateLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                          android:layout_width="match_parent"
-                                                          android:layout_height="match_parent">
+<com.onenine.template.refresh.RefreshTemplateLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="match_parent">
     <ViewStub
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-</com.ryanx.onenine.template.refresh.RefreshTemplateLayout>
+</com.onenine.template.refresh.RefreshTemplateLayout>

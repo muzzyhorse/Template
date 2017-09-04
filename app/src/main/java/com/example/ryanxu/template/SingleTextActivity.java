@@ -1,25 +1,31 @@
 package com.example.ryanxu.template;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.ryanx.onenine.template.SingleTemplateActivity;
+import com.onenine.template.annotations.InitMethod;
+import com.onenine.template.annotations.InflateLayouts;
+import com.onenine.template.annotations.TemplateLayout;
 
 /**
  * Created by Ryan.Xu on 2017/9/1.
  */
 
-public class SingleTextActivity extends SingleTemplateActivity {
+@TemplateLayout(R.layout.template_single)
+@InflateLayouts(R.layout.activity_text)
+public class SingleTextActivity extends BaseActivity {
+
 
     @Override
-    protected int getContentResource() {
-        return R.layout.activity_text;
+    public void onInflateView(int type, View view) {
+        setTitle(SingleTextActivity.class.getSimpleName());
+        ((TextView)view).setText(SingleTextActivity.class.getSimpleName());
     }
 
-    @Override
-    protected void initContent(View content) {
-        setTitle(SingleTextActivity.class.getSimpleName());
-        ((TextView)content).setText(SingleTextActivity.class.getSimpleName());
+    @InitMethod(R.layout.activity_text)
+    void initContent(View view) {
+        Log.e("xuchunlei", "inside initContent " + view.getClass().getSimpleName());
     }
 
 }

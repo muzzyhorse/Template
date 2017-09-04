@@ -1,47 +1,41 @@
-package com.ryanx.onenine.template.refresh;
+package com.example.ryanxu.template;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.view.LayoutInflaterCompat;
 import android.support.v4.view.LayoutInflaterFactory;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewStub;
 
-import com.ryanx.onenine.template.R;
-import com.ryanx.onenine.template.core.AbsTemplateActivity;
+import com.onenine.template.TemplateInflateListener;
+import com.onenine.template.TemplateStick;
+import com.onenine.template.refresh.IRefreshContainer;
 
 /**
- * Created by xuchunlei on 2017/9/2.
+ * Created by xuchunlei on 2017/9/4.
  */
 
-public abstract class RefreshTemplateActivity extends AbsTemplateActivity {
+public abstract class BaseActivity extends AppCompatActivity implements TemplateInflateListener{
 
     private final int[] TEMPLATE_ATTRS = new int[] {
-            R.attr.enable_spring,
+            com.ryanx.onenine.template.R.attr.enable_spring,
     };
-
-
-    /**
-     * 获取内容布局资源
-     * @return
-     */
-    @LayoutRes
-    protected abstract int getContentResource();
-
-    /**
-     * 初始化内容视图
-     * @param content
-     */
-    protected abstract void initContent(View content);
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        injectInflater();
+        super.onCreate(savedInstanceState);
+
+        TemplateStick.init(this);
+    }
+
+
+    private void injectInflater() {
         // 自定义LayoutInflater的Factory，用于处理框架定义的属性
         LayoutInflaterCompat.setFactory(LayoutInflater.from(this), new LayoutInflaterFactory() {
             @Override
@@ -50,7 +44,7 @@ public abstract class RefreshTemplateActivity extends AbsTemplateActivity {
                 View v = delegate.createView(parent, name, context, attrs);
 
                 if(v != null && parent instanceof IRefreshContainer) {
-                    final TypedArray a = obtainStyledAttributes(attrs, TEMPLATE_ATTRS, R.attr.enable_spring, 0);
+                    final TypedArray a = obtainStyledAttributes(attrs, TEMPLATE_ATTRS, com.ryanx.onenine.template.R.attr.enable_spring, 0);
                     boolean spring = a.getBoolean(0, false);
                     if(parent instanceof IRefreshContainer) {
                         IRefreshContainer container = (IRefreshContainer)parent;
@@ -63,21 +57,5 @@ public abstract class RefreshTemplateActivity extends AbsTemplateActivity {
                 return v;
             }
         });
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
-    protected int getTemplateResource() {
-        return R.layout.template_refresh;
-    }
-
-    @Override
-    protected void onInflateView(int type, View view) {
-        ViewStub stub = (ViewStub)view;
-        @LayoutRes int layout = getContentResource();
-        if(layout > 0) {
-            stub.setLayoutResource(layout);
-            initContent(stub.inflate());
-        }
     }
 }
