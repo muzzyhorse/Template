@@ -21,6 +21,8 @@
 
         <!-- 单一布局模板Demo活动 -->
         <activity android:name=".SingleTextActivity" />
+        <!-- 刷新布局模版Demo活动 -->
+        <activity android:name=".RefreshTextActivity" />
     </application>
 
 </manifest>

@@ -25,7 +25,7 @@ public abstract class SingleTemplateActivity extends AbsTemplateActivity {
      * @return
      */
     @LayoutRes
-    protected abstract int getContentResources();
+    protected abstract int getContentResource();
 
     /**
      * 初始化内容视图
@@ -34,17 +34,12 @@ public abstract class SingleTemplateActivity extends AbsTemplateActivity {
     protected abstract void initContent(View content);
 
     @Override
-    protected void onBindView(int type, View view) {
+    protected void onInflateView(int type, View view) {
         ViewStub stub = (ViewStub)view;
-        @LayoutRes int layout = getContentResources();
+        @LayoutRes int layout = getContentResource();
         if(layout > 0) {
             stub.setLayoutResource(layout);
             initContent(stub.inflate());
         }
-    }
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 }

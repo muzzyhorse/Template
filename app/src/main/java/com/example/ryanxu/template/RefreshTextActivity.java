@@ -3,13 +3,13 @@ package com.example.ryanxu.template;
 import android.view.View;
 import android.widget.TextView;
 
-import com.ryanx.onenine.template.SingleTemplateActivity;
+import com.ryanx.onenine.template.refresh.RefreshTemplateActivity;
 
 /**
- * Created by Ryan.Xu on 2017/9/1.
+ * Created by xuchunlei on 2017/9/2.
  */
 
-public class SingleTextActivity extends SingleTemplateActivity {
+public class RefreshTextActivity extends RefreshTemplateActivity {
 
     @Override
     protected int getContentResource() {
@@ -21,5 +21,4 @@ public class SingleTextActivity extends SingleTemplateActivity {
         setTitle(SingleTextActivity.class.getSimpleName());
         ((TextView)content).setText(SingleTextActivity.class.getSimpleName());
     }
-
 }

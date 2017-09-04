@@ -1,12 +1,22 @@
 package com.ryanx.onenine.template.core;
 
+import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.v4.view.LayoutInflaterCompat;
+import android.support.v4.view.LayoutInflaterFactory;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+
+import com.ryanx.onenine.template.R;
+import com.ryanx.onenine.template.refresh.IRefreshContainer;
 
 /**
  * 抽象模板活动
@@ -25,15 +35,21 @@ public abstract class AbsTemplateActivity extends AppCompatActivity {
     @LayoutRes
     protected abstract int getTemplateResource();
 
-    protected abstract void onBindView(int type, View view);
+    /**
+     * 绑定视图
+     * <p>
+     *     初始化实际的布局或视图
+     * </p>
+     * @param type
+     * @param view
+     */
+    protected abstract void onInflateView(int type, View view);
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(getTemplateResource());
 
-        //注意这个vGroup并不是activity.xml中定义的根布局， mRootView才是。
         ViewGroup contentContainer = (ViewGroup) getWindow().getDecorView().findViewById(android.R.id.content);
         View contentV = contentContainer.getChildAt(0);
         if(contentV == null) {
@@ -59,9 +75,10 @@ public abstract class AbsTemplateActivity extends AppCompatActivity {
 
         if(stub.getLayoutResource() > 0 ) {
             View inflatedV = stub.inflate();
-            onBindView(stub.getInflatedId() != View.NO_ID ? stub.getInflatedId() : inflatedV.getId(), inflatedV);
+            onInflateView(stub.getInflatedId() != View.NO_ID ? stub.getInflatedId() : inflatedV.getId(), inflatedV);
         }else {
-            onBindView(stub.getId(), stub);
+            onInflateView(stub.getId(), stub);
         }
     }
+
 }

@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     static {
         DEMO_DATA = new ArrayList<>();
         DEMO_DATA.add(new DemoItem("单一模板文本Demo", SingleTextActivity.class.getName()));
+        DEMO_DATA.add(new DemoItem("刷新模板文本Demo", RefreshTextActivity.class.getName()));
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
